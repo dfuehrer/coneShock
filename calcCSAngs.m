@@ -153,10 +153,10 @@ function [thetaS, offBy, fit] = calcCSAngs(M, tc, prevThetaS)
 %             [thetaS(m, c), offBy(m, c)] = badZero(@(thetaS) coneError(thetaS, thetaC, M1), guess, tol);
             [thetaS(m, c), offBy(m, c)] = fzero(@(thetaS) coneError(thetaS, thetaC, M1), guess([1, 3]));
         end
+        % calculate the fit again (was not calculated for the very first time above)
+        [~, j, ts] = find(thetaS(m, :));
+        fit(m, :) = 1./polyval(polyfit(tc(j), 1./ts, bestFO(1)), tc);
     end
-    % calculate the fit again (was not calculated for the very first time above)
-    [~, j, ts] = find(thetaS(m, :));
-    fit(m, :) = 1./polyval(polyfit(tc(j), 1./ts, bestFO(1)), tc);
 end
 
 % the standard deviation of the fit

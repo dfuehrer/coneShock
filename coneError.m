@@ -32,6 +32,7 @@ function err = coneError(thetaShock, thetaC, M1, gamma)
         % standard: derivative of first element is the second
         % solved rest of eq for the second part
         % because of another relation, we know that the derivative of vr is vtheta
+        % NOTE if i was smart i wouldnt define this function in the middle of the loop for no reason
         f = @(theta, vrp) [vrp(2); ((gamma-1)/2 * (vrp(2).^2 + vrp(1).^2 -1) .* (2*vrp(1) + vrp(2) .* cot(theta)) + vrp(2).^2 .* vrp(1)) ./ ((gamma-1)/2 * (1 - vrp(1).^2 - vrp(2).^2) - vrp(2).^2)];
         lowerBound = thetaC * lowScaler * d2r;    % arbitrary, not too low hopefully where things get too weird, but hopefully low enough to make sure we dont need to recalculate
         theta0 = -1;                        % arbitrary, less than lowerBound to make sure itll loop

@@ -1,6 +1,6 @@
 clear
 M = [1.5, 2, 5];    % list of mach numbers to run
-tc = 0:55;          % list of cone angles to calculate
+tc = 0:.2:55;          % list of cone angles to calculate
 maxIter = 5;        % number of times to run through fixing points
 iter = 1;
 tic     % remove eventually
@@ -32,3 +32,14 @@ while any(offby, 'all') && (iter < maxIter)     % loop while still making change
     iter = iter + 1;        % iterate 
 end
 
+
+figure, hold on
+for m = 1:length(M)
+    [~, j] = find(thetaS(m, :));
+    %plot(tc(j), fit(m, j), '.-.', 'MarkerSize', 5, 'DisplayName', ['fit ' char(string(M(m)))]);
+    plot(tc(j), thetaS(m, j), '.-', 'MarkerSize', 6, 'DisplayName', ['M = ' char(string(M(m)))]);
+end
+xlabel('Cone Angle')
+xlabel('Shock Angle')
+ylim([0, 75])
+legend
