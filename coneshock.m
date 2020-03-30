@@ -33,13 +33,18 @@ while any(offby, 'all') && (iter < maxIter)     % loop while still making change
 end
 
 
+maxThetaS = zeros(size(M));
 figure, hold on
 for m = 1:length(M)
-    [~, j] = find(thetaS(m, :));
-    %plot(tc(j), fit(m, j), '.-.', 'MarkerSize', 5, 'DisplayName', ['fit ' char(string(M(m)))]);
-    plot(tc(j), thetaS(m, j), '.-', 'MarkerSize', 6, 'DisplayName', ['M = ' char(string(M(m)))]);
+    [~, jj] = find(thetaS(m, :));
+    %plot(tc(jj), fit(m, jj), '.-.', 'MarkerSize', 5, 'DisplayName', ['fit ' char(string(M(m)))]);
+    plot(tc(jj), thetaS(m, jj), '.-', 'MarkerSize', 5, 'DisplayName', ['M = ' char(string(M(m)))]);
+    maxThetaS(m) = max(tc(jj));
+    fprintf('Max cone angle for Mach = %.2f is:\t%.2f\n', M(m), maxThetaS(m));
 end
 xlabel('Cone Angle')
-xlabel('Shock Angle')
+ylabel('Shock Angle')
 ylim([0, 75])
 legend
+
+
