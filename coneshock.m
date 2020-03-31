@@ -17,10 +17,10 @@ iter = 1;
 
 % loop through readjusting points that are outside the norm
 while any(offby, 'all') && (iter < maxIter)     % loop while still making changes and have tried to fix under 5 times
-    tic
+%     tic
     % calculate things again
     [thetaS, offby, fit] = calcCSAngs(M, tc, thetaS);
-    elapTime(iter+1) = toc
+%     elapTime(iter+1) = toc
 %     % plot everything out again with the fit
 %     figure
 %     hold on
